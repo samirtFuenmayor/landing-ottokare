@@ -1,0 +1,294 @@
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row items-stretch gap-16">
+      <!-- Columna izquierda -->
+      <div class="lg:w-1/2">
+        <p class="text-primaryLight font-semibold text-base mb-2">El bienestar que tu mascota merece</p>
+        <h2 class="text-4xl font-bold text-textMain mb-4">¿Qué incluye Ottokare?</h2>
+        <p class="text-gray-500 text-base leading-relaxed mb-10">
+          Una cobertura integral diseñada para que tú y tu mejor amigo vivan sin preocupaciones.
+        </p>
+        <img [src]="currentImage" [class.fade]="fade" class="mobile-img" />
+        <!-- Accordion -->
+        <div class="accordion-list" #accordion>
+
+          <!-- item 1 -->
+          <div class="accordion-item">
+            <button class="accordion-header"
+                    (click)="toggle(0)"
+                    [class.active]="activeIndex === 0">
+        
+              <div class="flex items-center gap-3">
+                <img src="assets/images/sections/includes/icon-close.svg" class="paw-icon">
+                Protección médica ante accidentes
+              </div>
+        
+              <span class="arrow" [class.rotate]="activeIndex === 0">⌄</span>
+            </button>
+        
+            <div class="accordion-body" [class.open]="activeIndex === 0">
+              Si tu mascota sufre un accidente, coordinamos y gestionamos los gastos médicos derivados,
+              incluyendo traslado, hospitalización, gastos veterinarios, cirugías, exámenes y medicamentos.
+        
+              <div class="restricciones">
+                *Aplica restricciones
+              </div>
+            </div>
+          </div>
+        
+          <!-- item 2 -->
+          <div class="accordion-item">
+            <button class="accordion-header"
+                    (click)="toggle(1)"
+                    [class.active]="activeIndex === 1">
+        
+              <div class="flex items-center gap-3">
+                <img src="assets/images/sections/includes/icon-close.svg" class="paw-icon">
+                Red de descuentos exclusiva
+              </div>
+        
+              <span class="arrow" [class.rotate]="activeIndex === 1">⌄</span>
+            </button>
+        
+            <div class="accordion-body" [class.open]="activeIndex === 1">
+              Accede a descuentos especiales en clínicas veterinarias, tiendas y servicios aliados.
+            </div>
+          </div>
+        
+          <!-- item 3 -->
+          <div class="accordion-item">
+            <button class="accordion-header"
+                    (click)="toggle(2)"
+                    [class.active]="activeIndex === 2">
+        
+              <div class="flex items-center gap-3">
+                <img src="assets/images/sections/includes/icon-close.svg" class="paw-icon">
+                Hospedaje de calidad
+              </div>
+        
+              <span class="arrow" [class.rotate]="activeIndex === 2">⌄</span>
+            </button>
+        
+            <div class="accordion-body" [class.open]="activeIndex === 2">
+              Servicio de hospedaje para tu mascota cuando no puedas estar con ella.
+            </div>
+          </div>
+        
+          <!-- item 4 -->
+          <div class="accordion-item">
+            <button class="accordion-header"
+                    (click)="toggle(3)"
+                    [class.active]="activeIndex === 3">
+        
+              <div class="flex items-center gap-3">
+                <img src="assets/images/sections/includes/icon-close.svg" class="paw-icon">
+                Servicio de asistencia exequial
+              </div>
+        
+              <span class="arrow" [class.rotate]="activeIndex === 3">⌄</span>
+            </button>
+        
+            <div class="accordion-body" [class.open]="activeIndex === 3">
+              Acompañamiento y servicios fúnebres para despedir a tu mascota con dignidad.
+            </div>
+          </div>
+        
+        </div>
+
+        <!-- Botón -->
+        <div class="mt-10">
+          <button class="bg-primary text-white px-7 py-3 rounded-md font-semibold flex items-center gap-2 hover:bg-primaryLight transition">
+            Quiero la asistencia para mi mascota
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8l4 4-4 4M8 12h8"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Columna derecha — imagen -->
+      <div class="lg:w-1/2 flex">
+        <img
+        [src]="currentImage"
+        class="pet-image"
+        [class.fade]="fade"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.accordion-item{
+border-bottom:1px solid #e5e7eb;
+}
+
+.accordion-header{
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 0;
+font-size:18px;
+font-weight:600;
+color:#4b5563;
+background:none;
+border:none;
+cursor:pointer;
+}
+
+.accordion-header.active{
+color:#0ea5b7;
+}
+
+.accordion-body{
+max-height:0;
+overflow:hidden;
+transition:max-height .35s ease, padding .35s ease;
+padding-left:34px;
+padding-bottom:0;
+color:#4b5563;
+line-height:1.6;
+}
+
+.accordion-body.open{
+max-height:500px;
+padding-bottom:16px;
+}
+
+.restricciones{
+color:#0ea5b7;
+font-size:14px;
+margin-top:6px;
+}
+
+.arrow{
+transition:transform .3s;
+}
+
+.arrow.rotate{
+transform:rotate(180deg);
+}
+
+.paw-icon{
+width:20px;
+height:20px;
+opacity:.8;
+}
+
+.image-transition{
+transition:opacity .35s ease;
+opacity:1;
+}
+
+.image-transition.fade{
+opacity:0;
+}
+
+.pet-image{
+width:100%;
+max-width:520px;
+border-radius:16px;
+object-fit:cover;
+
+/* importante */
+height:100%;
+align-self:stretch;
+
+/* animación tamaño */
+transition:
+height .45s ease,
+opacity .6s ease,
+transform .45s ease;
+}
+
+/* fade más suave */
+.pet-image.fade{
+opacity:0;
+transform:scale(0.98);
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+
+/* Mantener 2 columnas lado a lado */
+.max-w-7xl .flex.flex-col.lg\:flex-row {
+  flex-direction: row !important;
+  gap: 24px !important;
+  align-items: stretch !important;
+}
+
+.lg\:w-1\/2 {
+  width: 50% !important;
+}
+
+/* Textos */
+h2.text-4xl {
+  font-size: 28px !important;
+  line-height: 1.15 !important;
+  margin-bottom: 12px !important;
+}
+
+.text-primaryLight.font-semibold {
+  font-size: 14px !important;
+}
+
+p.text-gray-500 {
+  font-size: 14px !important;
+}
+
+/* Accordion */
+.accordion-header {
+  font-size: 15px !important;
+  padding: 14px 0 !important;
+}
+
+.accordion-body {
+  font-size: 14px !important;
+}
+
+/* Botón */
+.bg-primary {
+  font-size: 14px !important;
+  padding: 12px 18px !important;
+}
+
+/* Imagen — ocupa toda la altura de su columna */
+.pet-image {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 400px !important;
+  border-radius: 16px !important;
+  object-fit: cover !important;
+}
+}
+
+.mobile-img { display: none; }
+
+@media (max-width: 480px) {
+  .mobile-img {
+    display: block !important;
+    width: 100% !important;
+    height: 220px !important;
+    border-radius: 16px !important;
+    object-fit: cover !important;
+    margin-bottom: 24px !important;
+  }
+  .lg\:w-1\/2:last-child { display: none !important; }
+  /* Botón sin salto de línea */
+  .bg-primary {
+    width: 100% !important;
+    justify-content: center !important;
+    font-size: 13px !important;
+    padding: 12px 14px !important;
+    white-space: nowrap !important;
+  }
+
+  h2.text-4xl { font-size: 28px !important; line-height: 1.15 !important; }
+  .accordion-header { font-size: 14px !important; padding: 14px 0 !important; }
+  .accordion-body { font-size: 13px !important; }
+}
+
+</style>

@@ -1,0 +1,456 @@
+<!-- navbar.component.html -->
+<header class="navbar">
+  <div class="navbar-container">
+
+    <!-- LOGOS -->
+    <div class="navbar-logos">
+      <img src="assets/images/sections/logo-closeness-ottokare.svg" alt="Closeness" class="logo-closeness">
+    </div>
+
+    <!-- NAV LINKS -->
+    <nav class="navbar-links">
+      <a href="#porque">¿Porqué la necesitas?</a>
+      <a href="#beneficios">¿Qué beneficios tiene?</a>
+      <a href="#planes">Nuestros planes</a>
+      <a href="#adquiere" class="nav-cta">Adquiere un plan</a>
+    </nav>
+
+    <!-- HAMBURGER (mobile) -->
+    <button class="hamburger" (click)="menuOpen = !menuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" [class.open]="menuOpen">
+    <a href="#porque" (click)="menuOpen = false">¿Porqué la necesitas?</a>
+    <a href="#beneficios" (click)="menuOpen = false">¿Qué beneficios tiene?</a>
+    <a href="#planes" (click)="menuOpen = false">Nuestros planes</a>
+    <a href="#adquiere" (click)="menuOpen = false" class="nav-cta">Adquiere un plan</a>
+  </div>
+
+</header>
+
+<section class="relative overflow-hidden hero-section">  
+  <!-- La imagen ES todo el hero -->
+  <picture>
+    <source media="(min-width: 481px) and (max-width: 1024px)" srcset="assets/images/hero/Fondo-Banner-Tablet.webp">
+    <img 
+      src="assets/images/hero/FondoBanner.webp"
+      alt="Hero Banner"
+      class="hero-bg-img"
+    />
+  </picture>
+  
+  <!-- Texto encima de la imagen -->
+  <div class="absolute inset-0 flex items-center">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+      <div class="lg:w-1/2 text-white">
+        
+        <h1 class="text-4xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight">
+          Protege a tu mascota con
+          <span class="text-primaryLight block mt-2">OttoKare</span>
+        </h1>
+        
+        <p class="mt-8 text-lg lg:text-xl text-white/90 max-w-lg leading-relaxed">
+          Con nuestra asistencia para mascotas garantiza la salud,
+          bienestar y cuidados constantes de tu peludito.
+        </p>
+        
+        <div class="mt-10 flex flex-wrap gap-5">
+          <button class="bg-primaryLight hover:opacity-90 transition 
+                         text-white px-8 py-4 rounded-full 
+                         font-semibold text-base shadow-lg">
+            Quiero cuidar a mi mascota ➔
+          </button>
+          <button class="border-2 border-white text-white
+                         px-8 py-4 rounded-full font-semibold text-base
+                         hover:bg-white hover:text-primary transition btn-secondary">
+            Ver planes ➔
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  .hero-section{
+  padding-top:60px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #0a4d5c;
+}
+.navbar-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-closeness {
+  height: 32px;
+  width: auto;
+}
+
+.logo-ottokare {
+  height: 36px;
+  width: auto;
+}
+
+.divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+
+  a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #ffffff;
+    }
+
+    &.nav-cta {
+      color: #ffffff;
+      font-weight: 700;
+    }
+  }
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+  }
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #0a4d5c;
+  padding: 0 24px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+
+  &.open {
+    max-height: 300px;
+    padding: 16px 24px 24px;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &.nav-cta {
+      font-weight: 700;
+      color: white;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .navbar-container {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+
+/* ── NAVBAR ── */
+.navbar {
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.navbar-container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 24px !important;
+  height: 60px !important;
+  box-sizing: border-box !important;
+}
+
+.logo-closeness {
+  height: 32px !important;
+}
+
+.navbar-links {
+  display: none !important;
+}
+
+.hamburger {
+  display: flex !important;
+}
+
+.hamburger span {
+  width: 24px !important;
+  height: 2px !important;
+}
+
+/* mobile-menu necesita display:flex para que Angular pueda animarlo */
+.mobile-menu {
+  display: flex !important;
+  max-height: 0 !important;
+  padding: 0 24px !important;
+}
+
+.mobile-menu.open {
+  max-height: 300px !important;
+  padding: 16px 24px 24px !important;
+}
+
+/* ── HERO ── */
+.hero-section {
+  height: 100vh !important;
+  min-height: 600px !important;
+  padding-top: 0 !important;
+  background-color: #0a4d5c !important;
+  background-image: url('assets/images/hero/Fondo-Banner-Tablet.webp') !important;
+  background-size: auto 100% !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  position: relative !important;
+}
+
+.hero-section picture {
+  display: none !important;
+}
+
+.hero-section .absolute.inset-0 {
+  top: 0 !important;
+  padding-top: 60px !important;
+}
+
+.hero-section .lg\:w-1\/2 { 
+  width: 60% !important; 
+}
+
+.hero-section h1 { 
+  font-size: 52px !important; 
+  line-height: 1.1 !important; 
+}
+
+.hero-section h1 span { 
+  font-size: 54px !important; 
+}
+
+.hero-section p { 
+  font-size: 18px !important; 
+  max-width: 420px !important;
+  line-height: 1.6 !important;
+}
+
+.hero-section .mt-10 { 
+  flex-direction: column !important; 
+  align-items: flex-start !important; 
+  gap: 14px !important; 
+}
+
+.hero-section button:first-child {
+  padding: 16px 32px !important;
+  font-size: 16px !important;
+}
+
+.btn-secondary { 
+  display: none !important; 
+}
+}
+
+@media (max-width: 480px) {
+  /* NAVBAR */
+ /* NAVBAR */
+ .navbar {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  .navbar-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 16px !important;
+    height: 60px !important;
+    box-sizing: border-box !important;
+  }
+
+  .logo-closeness {
+    height: 35px !important;
+  }
+
+  .navbar-links {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+    gap: 4px !important;
+  }
+
+  .hamburger span {
+    width: 26px !important;
+    height: 3px !important;
+  }
+
+  .mobile-menu {
+    display: flex !important;
+    max-height: 0 !important;
+    padding: 0 16px !important;
+  }
+
+  .mobile-menu.open {
+    max-height: 300px !important;
+    padding: 16px 16px 24px !important;
+  }
+
+  /* HERO SECTION */
+  .hero-section {
+    height: 80vh !important; /* Ocupa toda la pantalla para que el perro se vea abajo */
+    min-height: 400px !important;
+    background-color: #0a4d5c !important;
+    /* Asegúrate de que la imagen de fondo sea la del perro a la derecha */
+    background-image: url('assets/images/hero/FondoBanner-Mobile.webp') !important;
+    background-size: auto 90% !important;
+    background-position: right bottom !important; 
+    background-repeat: no-repeat !important;
+    position: relative !important;
+    overflow: hidden !important;
+
+  }
+
+  /* Ocultar etiquetas picture si usas background-image */
+  .hero-section picture { 
+    display: none !important; 
+  }
+
+  /* CONTENEDOR DE TEXTO */
+  .hero-section .absolute.inset-0 {
+    padding: 120px 12px 0 16px !important; /* Baja el texto para que no pegue al nav */
+    display: block !important;
+  }
+
+  /* TÍTULO - Ajuste de fuente y espaciado */
+  .hero-section h1 {
+    font-size: 42px !important; /* Más grande según la imagen */
+    line-height: 1.0 !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    letter-spacing: -1px !important;
+    max-width: 280px !important; /* Forzar el salto de línea igual a la imagen */
+  }
+
+  .hero-section .max-w-7xl {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .hero-section h1 span {
+    font-size: 46px !important;
+    color: #00bcd4 !important; /* El color cyan de OttoKare */
+    display: block !important;
+    margin-top: 8px !important;
+  }
+
+  /* PÁRRAFO - Estrecho para dejar espacio al perro */
+  .hero-section p {
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+    width: 190px !important; /* Clave: Solo ocupa la mitad izquierda */
+    margin-top: 25px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* BOTÓN - Estilo exacto de la imagen */
+  .hero-section .mt-10 {
+    margin-top: 140px !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+  }
+
+  .hero-section button:first-child {
+    background-color: #00bcd4 !important; /* Color Cyan del botón */
+    padding: 14px 24px !important;
+    font-size: 15px !important;
+    border-radius: 8px !important; /* Menos redondeado, más rectangular con puntas suaves */
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: auto !important;
+    border: none !important;
+  }
+
+  /* Ocultar el botón secundario en móvil como en la imagen */
+  .btn-secondary {
+    display: none !important;
+  }
+}
+
+</style>
