@@ -10,12 +10,13 @@ phases:
 
   build:
     commands:
-      - ng build --configuration production
+      - ng build --configuration production --no-prerender --no-ssr
 
   post_build:
     commands:
       - aws s3 sync dist/landing-ottokare/browser s3://landing-ottokare-samirt --delete
       - aws cloudfront create-invalidation --distribution-id E265TYHO93ZEZ2 --paths "/*"
+
 artifacts:
   files:
     - '**/*'
