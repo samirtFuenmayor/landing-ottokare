@@ -1,4 +1,4 @@
-<section class="py-24 bg-white">
+<section id="beneficios" class="py-24 bg-white">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex flex-col lg:flex-row items-stretch gap-16">
       <!-- Columna izquierda -->
@@ -97,7 +97,8 @@
 
         <!-- Botón -->
         <div class="mt-10">
-          <button class="bg-primary text-white px-7 py-3 rounded-md font-semibold flex items-center gap-2 hover:bg-primaryLight transition">
+          <button class="bg-primary text-white px-7 py-3 rounded-md font-semibold flex items-center gap-2 hover:bg-primaryLight transition"
+          onclick="document.getElementById('adquiere').scrollIntoView({behavior:'smooth'})">
             Quiero la asistencia para mi mascota
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
@@ -109,11 +110,13 @@
 
       <!-- Columna derecha — imagen -->
       <div class="lg:w-1/2 flex">
-        <img
-        [src]="currentImage"
-        class="pet-image"
-        [class.fade]="fade"
-        />
+        <div class="pet-image-frame" [style.background-image]="'url(' + currentImage + ')'">
+          <img
+            [src]="currentImage"
+            class="pet-image-inner"
+            [class.fade-out]="fade"
+          />
+        </div>
       </div>
 
     </div>
@@ -121,93 +124,58 @@
 </section>
 
 <style>
-.accordion-item{
-border-bottom:1px solid #e5e7eb;
+  html {
+  scroll-behavior: smooth;
 }
 
-.accordion-header{
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 0;
-font-size:18px;
-font-weight:600;
-color:#4b5563;
-background:none;
-border:none;
-cursor:pointer;
+/* --- ACORDEÓN (Texto) --- */
+.accordion-item { border-bottom: 1px solid #e5e7eb; }
+.accordion-header {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-size: 18px; font-weight: 600; color: #4b5563;
+  background: none; border: none; cursor: pointer;
+}
+.accordion-header.active { color: #0ea5b7; }
+
+.accordion-body {
+  max-height: 0; overflow: hidden;
+  /* El tiempo del acordeón debe ser igual al de la imagen para ir a la par */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-left: 34px; color: #4b5563; line-height: 1.6;
+}
+.accordion-body.open { max-height: 500px; padding-bottom: 16px; }
+
+/* --- CONTENEDOR DE IMAGEN (El que se estira) --- */
+.pet-image-frame {
+  width: 100%;
+  max-width: 520px;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  align-self: stretch;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Transición más lenta y 'elástica' para el crecimiento */
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  background-color: #f8fafc;
+}
+/* --- LA IMAGEN (La que hace fade) --- */
+.pet-image-inner, .mobile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
+  /* Desvanecimiento suave */
+  transition: opacity 0.4s ease-in-out;
 }
 
-.accordion-header.active{
-color:#0ea5b7;
-}
-
-.accordion-body{
-max-height:0;
-overflow:hidden;
-transition:max-height .35s ease, padding .35s ease;
-padding-left:34px;
-padding-bottom:0;
-color:#4b5563;
-line-height:1.6;
-}
-
-.accordion-body.open{
-max-height:500px;
-padding-bottom:16px;
-}
-
-.restricciones{
-color:#0ea5b7;
-font-size:14px;
-margin-top:6px;
-}
-
-.arrow{
-transition:transform .3s;
-}
-
-.arrow.rotate{
-transform:rotate(180deg);
-}
-
-.paw-icon{
-width:20px;
-height:20px;
-opacity:.8;
-}
-
-.image-transition{
-transition:opacity .35s ease;
-opacity:1;
-}
-
-.image-transition.fade{
-opacity:0;
-}
-
-.pet-image{
-width:100%;
-max-width:520px;
-border-radius:16px;
-object-fit:cover;
-
-/* importante */
-height:100%;
-align-self:stretch;
-
-/* animación tamaño */
-transition:
-height .45s ease,
-opacity .6s ease,
-transform .45s ease;
-}
-
-/* fade más suave */
-.pet-image.fade{
-opacity:0;
-transform:scale(0.98);
+/* Usaremos fade-out para que coincida con tu lógica de Angular */
+.fade-out {
+  opacity: 0 !important;
 }
 
 @media (min-width: 481px) and (max-width: 1024px) {

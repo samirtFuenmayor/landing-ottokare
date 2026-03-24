@@ -177,41 +177,78 @@ label{
   margin-bottom:25px;
 }
 
-.gender-options button{
-  flex:1;
-  padding:12px;
-  border-radius:12px;
-  border:2px solid #e5e7eb;
-  background:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:.2s;
+.gender-options button {
+  flex: 1;
+  padding: 16px; /* Un poco más de padding para que se vea robusto como la imagen */
+  border-radius: 12px;
+  border: 2px solid #d1d5db;
+  background: white;
+  font-weight: 600;
+  font-size: 16px;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transición suave igual que la pet-card */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.gender-options button.active{
-  background:#0e5f6e;
-  color:white;
-  border-color:#0e5f6e;
+.gender-options button:hover {
+  transform: translateY(-4px);
+  background: #0e5f6e;
+  border-color: #0e5f6e;
+  color: white; /* El texto cambia a blanco al hacer hover */
 }
 
-.plan-options{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  margin:30px 0;
+
+.gender-options button.active {
+  background: #0e5f6e;
+  color: white;
+  border-color: #0e5f6e;
+  box-shadow: 0 4px 12px rgba(14, 95, 110, 0.3);
 }
 
-.plan-card{
-  border:2px solid #e5e7eb;
-  border-radius:16px;
-  padding:20px;
-  background:white;
-  cursor:pointer;
-  transition:.2s;
+.plan-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
 }
 
-.plan-card img{
-  width:130px;
+.plan-card {
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transición suave */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.plan-card img {
+  width: 130px;
+  transition: filter 0.3s ease; /* Para que el logo resalte si es necesario */
+}
+
+/* --- EFECTOS PARA OTTOPLAN (MORADO) --- */
+.plan-card.otto-plan:hover, 
+.plan-card.otto-plan.active {
+  background-color: #834f96; /* Color morado de la marca */
+  border-color: #834f96;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(131, 79, 150, 0.2);
+}
+  /* --- EFECTOS PARA OTTOPLUS (AMARILLO) --- */
+.plan-card.otto-plus:hover, 
+.plan-card.otto-plus.active {
+  background-color: #ffb400; /* Color amarillo de la marca */
+  border-color: #ffb400;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(255, 180, 0, 0.2);
 }
 
 .plan-card.active{
@@ -225,9 +262,11 @@ label{
   gap:15px;
 }
 
-.btn-row{
-  display:flex;
-  justify-content:flex-end;
+.btn-row {
+  clear: both;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
 }
 
 .btn-primary{
@@ -327,6 +366,126 @@ label{
     }
   }
 }
+.form-sub-detail {
+  color: #0e5f6e;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.label-main {
+  font-size: 20px !important;
+  color: #0e5f6e !important;
+  margin-bottom: 5px !important;
+}
+
+.label-instruction {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.date-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.select-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.select-group span {
+  text-align: left;
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.input-select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1.5px solid #0e5f6e;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 16px;
+  color: #6b7280;
+  appearance: none; /* Quitamos estilo por defecto */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230e5f6e'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  cursor: pointer;
+  outline: none;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.btn-toggle-date {
+  background: #e0f2fe;
+  color: #0e5f6e;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  display: inline-block;
+  float: left; /* Alineado a la izquierda como la imagen */
+}
+
+.btn-toggle-date:hover {
+  background: #bfdbfe;
+}
+
+.btn-primary-next {
+  background: #005f73;
+  color: white;
+  border: none;
+  padding: 14px 45px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  float: right;
+}
+
+
+.label-instruction-blue {
+  font-size: 16px;
+  color: #0e5f6e;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Animaciones */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.approx-fade {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; height: 0; }
+  to { opacity: 1; height: auto; }
+}
+
 
 /* MAX 900 — mobile */
 @media (max-width: 900px) {
@@ -611,5 +770,8 @@ export class JoinComponent {
     }
   
   }
+  daysList = Array.from({length: 31}, (_, i) => i + 1);
+  monthsList = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  yearsList = Array.from({length: 20}, (_, i) => 2026 - i);
 
 }

@@ -22,28 +22,30 @@ export class IncludesComponent {
   fade = false;
 
   toggle(index: number) {
-
+    // 1. Iniciar desvanecimiento de la imagen frontal
+    this.fade = true;
+  
     if (this.activeIndex === index) {
-      this.activeIndex = null;
-  
-      this.fade = true;
-  
+      // Caso: Cerrar el acordeón
       setTimeout(() => {
+        this.activeIndex = null;
         this.currentImage = 'assets/images/sections/includes/que-incluye-img-desktop.webp';
-        this.fade = false;
-      }, 400);
-  
+        // Esperamos un momento extra antes de volver a mostrar la imagen
+        setTimeout(() => this.fade = false, 50);
+      }, 300); // Tiempo que tarda en ser invisible
       return;
     }
   
-    this.activeIndex = index;
-  
-    this.fade = true;
-  
+    // Caso: Cambiar a una nueva pestaña
     setTimeout(() => {
+      this.activeIndex = index; 
       this.currentImage = this.images[index];
-      this.fade = false;
-    }, 200);
-  
+      
+      // El secreto: No quitar el fade inmediatamente para que no haya parpadeo
+      setTimeout(() => {
+        this.fade = false;
+      }, 100); 
+    }, 300); 
   }
+  
 }
