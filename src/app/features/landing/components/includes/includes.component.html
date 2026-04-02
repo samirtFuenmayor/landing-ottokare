@@ -124,25 +124,63 @@
 </section>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
   html {
   scroll-behavior: smooth;
+}
+/* Agregar esta regla global para la sección */
+#beneficios .text-primaryLight {
+  color: #00B0C8 !important;   /* era: azul claro */
+  font-size: 20px !important;
+  font-family: 'Quicksand', sans-serif !important;
+  font-weight: 600 !important;
+}
+
+#beneficios h2.text-4xl {
+  font-size: 40px !important;
+  color: #005871 !important;   /* CORRECCIÓN #7 — título en azul de marca */
+  font-family: 'Quicksand', sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 48px !important;
+}
+
+#beneficios p.text-gray-500 {
+  font-size: 18px !important;
+  color: #4A4A4A !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 500 !important;
+  line-height: 26px !important;
+}
+
+#beneficios .bg-primary {
+  background: #005871 !important;   /* era: usando clase Tailwind */
+  font-size: 16px !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 600 !important;
 }
 
 /* --- ACORDEÓN (Texto) --- */
 .accordion-item { border-bottom: 1px solid #e5e7eb; }
 .accordion-header {
   width: 100%; display: flex; justify-content: space-between; align-items: center;
-  padding: 18px 0; font-size: 18px; font-weight: 600; color: #4b5563;
+  padding: 18px 0; font-size: 24px; font-weight: 700;font-family: 'Quicksand', sans-serif; color: #4b5563;
   background: none; border: none; cursor: pointer;
 }
 .accordion-header.active { color: #0ea5b7; }
 
 .accordion-body {
-  max-height: 0; overflow: hidden;
-  /* El tiempo del acordeón debe ser igual al de la imagen para ir a la par */
+  max-height: 0; 
+  overflow: hidden;
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  padding-left: 34px; color: #4b5563; line-height: 1.6;
+  padding-left: 34px; 
+  color: #4A4A4A;         /* era: #4b5563 */
+  font-size: 18px;        /* era: sin definir */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 26px;
 }
+
 .accordion-body.open { max-height: 500px; padding-bottom: 16px; }
 
 /* --- CONTENEDOR DE IMAGEN (El que se estira) --- */
@@ -178,7 +216,17 @@
   opacity: 0 !important;
 }
 
+.accordion-header.active .paw-icon {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(89%) saturate(400%) hue-rotate(150deg) brightness(95%);
+}
+
+.paw-icon {
+  transition: filter 0.3s ease;
+}
 @media (min-width: 481px) and (max-width: 1024px) {
+
+  #beneficios h2.text-4xl { font-size: 40px !important; }
+.accordion-header { font-size: 24px !important; }
 
 /* Mantener 2 columnas lado a lado */
 .max-w-7xl .flex.flex-col.lg\:flex-row {
@@ -236,6 +284,13 @@ p.text-gray-500 {
 .mobile-img { display: none; }
 
 @media (max-width: 480px) {
+
+  #beneficios h2.text-4xl { font-size: 32px !important; }
+#beneficios .text-primaryLight { font-size: 14px !important; }
+#beneficios p.text-gray-500 { font-size: 16px !important; }
+.accordion-header { font-size: 20px !important; }   /* H3 móvil = 20px */
+.accordion-body { font-size: 16px !important; }
+
   .mobile-img {
     display: block !important;
     width: 100% !important;

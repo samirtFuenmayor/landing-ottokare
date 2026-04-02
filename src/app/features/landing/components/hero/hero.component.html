@@ -42,23 +42,24 @@
           Protege a tu<br>
           mascota con<br>
           <span class="hero-brand">OttoKare</span>
+
         </h1>
 
         <p class="hero-subtitle">
-          Con nuestra asistencia<br>
-          para mascotas<br>
-          garantiza la salud,<br>
-          bienestar y cuidados<br>
-          constantes de tu peludito
+
+          Con nuestra asistencia para mascotas garantiza la<br>
+          salud, bienestar y cuidados constantes de tu peludito<br>
         </p>
 
         <div class="hero-buttons">
-          <button class="btn-primary" onclick="window.location.href='../join/join.component.html'">
-            Quiero cuidar a mi mascota <span class="btn-icon">⊕</span>
+          <button class="btn-primary" onclick="document.getElementById('adquiere').scrollIntoView({behavior:'smooth'})">
+            Quiero cuidar a mi mascota
+            <img src="assets/images/hero/arrow-btn.svg" alt="icon" class="btn-custom-icon">
           </button>
 
-          <button class="btn-secondary" onclick="window.location.href='../pricing/pricing.component.html'">
-            Ver planes <span class="btn-icon">⊕</span>
+          <button class="btn-secondary" onclick="document.getElementById('planes').scrollIntoView({behavior:'smooth'})">
+            Ver planes
+            <img src="assets/images/hero/arrow-btn.svg" alt="icon" class="btn-custom-icon">
           </button>
         </div>
       </div>
@@ -66,8 +67,10 @@
   </div>
 
 </section>
+<!-- REEMPLAZAR el @import actual por este -->
 <style>
- @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 /* ================= NAVBAR ================= */
 html {
@@ -80,7 +83,7 @@ html {
   left: 0;
   right: 0;
   z-index: 100;
-  background: #0a4d5c;
+  background: #005871;
 }
 
 .navbar-container {
@@ -108,7 +111,7 @@ html {
   text-decoration: none;
   font-size: clamp(13px, 1vw, 15px);
   font-weight: 600;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar-links a:hover {
@@ -139,7 +142,7 @@ html {
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background: #0a4d5c;
+  background: #005871;
   padding: 0 20px;
   max-height: 0;
   overflow: hidden;
@@ -210,6 +213,7 @@ html {
 
 /* TEXTO */
 .hero-title {
+  font-family: 'Quicksand', sans-serif;
   font-size: clamp(32px, 6vw, 68px);
   font-weight: 900;
   line-height: 1.05;
@@ -217,15 +221,18 @@ html {
 }
 
 .hero-brand {
+  font-family: 'Quicksand', sans-serif;
   display: block;
-  color: #00bcd4;
+  color: #00B0C8;
   font-size: clamp(32px, 6vw, 68px);
   font-weight: 900;
 }
 
 .hero-subtitle {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
   margin-top: clamp(12px, 2vw, 20px);
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: 18px;
   line-height: 1.5;
   max-width: 460px;
 }
@@ -234,18 +241,43 @@ html {
 .hero-buttons {
   margin-top: clamp(20px, 4vw, 36px);
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row; /* Fuerza que sea fila */
+  flex-wrap: nowrap;   /* Evita que el segundo botón se baje */
   gap: 12px;
 }
 
+.btn-primary, .btn-secondary {
+  /* CAMBIO CLAVE: Radio bajo para que sea cuadrado con puntas suaves */
+  border-radius: 8px !important; 
+  
+  padding: 12px 24px;
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-icon-custom {
+  width: 18px; 
+  height: 18px;
+  object-fit: contain;
+}
+
 .btn-primary {
-  background: #00bcd4;
+  background: #00B0C8;
   color: white;
   border: none;
   border-radius: 50px;
   padding: clamp(10px, 1.2vw, 14px) clamp(18px, 2vw, 26px);
-  font-size: clamp(13px, 1.2vw, 15px);
-  font-weight: 700;
+  font-size: 16px;        /* era: clamp(13px, 1.2vw, 15px) */
+  font-weight: 600;       /* SemiBold */
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -257,8 +289,9 @@ html {
   color: white;
   border-radius: 50px;
   padding: clamp(10px, 1.2vw, 13px) clamp(18px, 2vw, 26px);
-  font-size: clamp(13px, 1.2vw, 15px);
-  font-weight: 700;
+  font-size: 16px;        /* era: clamp(13px, 1.2vw, 15px) */
+  font-weight: 600;       /* SemiBold */
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -266,7 +299,7 @@ html {
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .navbar-links {
     display: none;
   }
@@ -287,6 +320,7 @@ html {
 .hero-section {
   height: auto;
   min-height: unset;
+  padding-top: 60px;
 }
 
 /* LA IMAGEN SE VUELVE REAL (NO BACKGROUND) */
@@ -304,16 +338,18 @@ html {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  align-items: flex-start;
+  display: flex;
+  align-items: center; 
 }
 
 .hero-inner {
   height: 100%;
+  padding: 0 clamp(24px, 5vw, 60px);
 }
 
 .hero-text {
   position: relative;
-  width: 55%;
+  width: 90%;
   height: 100%;
 }
 
@@ -336,7 +372,7 @@ html {
   top: 52%;
   left: 0;
   width: 80%;
-  font-size: 2vw;
+  font-size: 18px;        /* era: 2vw */
   line-height: 1.4;
 }
 
@@ -410,7 +446,7 @@ html {
   position: absolute;
   top: 17%;
   left: 0;
-  font-size: 10.2vw;
+  font-size: 10vw;
   line-height: 1.05;
 }
 
@@ -425,7 +461,7 @@ html {
   top: 50%;
   left: 0;
   width: 95%;
-  font-size: 4vw;
+  font-size: 16px;        /* era: 4vw */
   line-height: 1.4;
 }
 

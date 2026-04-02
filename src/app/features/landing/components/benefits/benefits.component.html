@@ -20,7 +20,7 @@
             <p class="card-text">Tu mascota sufrió una emergencia y necesitas actuar de inmediato.</p>
             <button class="card-btn-flip" (click)="flipCard(0)">Como te ayuda OttoKare</button>
           </div>
-          <div class="benefit-card back back-bg-1">
+          <div class="benefit-card back back-bg-1" (click)="unflipCard(0)">
             <img src="assets/images/sections/arrow-back.svg" class="back-arrow-icon" (click)="unflipCard(0)"/>
             <div class="back-content-inner">
               <img src="assets/images/sections/icon-card-back.png" class="back-icon-small"/>
@@ -39,7 +39,7 @@
             <p class="card-text">Necesitas respuestas inmediatas sobre tu mascota y no tienes a quien recurrir.</p>
             <button class="card-btn-flip" (click)="flipCard(1)">Como te ayuda OttoKare</button>
           </div>
-          <div class="benefit-card back back-bg-2">
+          <div class="benefit-card back back-bg-2" (click)="unflipCard(1)">
             <img src="assets/images/sections/arrow-back.svg" class="back-arrow-icon" (click)="unflipCard(1)"/>
             <div class="back-content-inner">
               <img src="assets/images/sections/icon-card-back.png" class="back-icon-small"/>
@@ -58,7 +58,7 @@
             <p class="card-text">Tu factura mensual es muy elevada en el cuidado de tu mascota.</p>
             <button class="card-btn-flip" (click)="flipCard(2)">Como te ayuda OttoKare</button>
           </div>
-          <div class="benefit-card back back-bg-3">
+          <div class="benefit-card back back-bg-3" (click)="unflipCard(2)">
             <img src="assets/images/sections/arrow-back.svg" class="back-arrow-icon" (click)="unflipCard(2)"/>
             <div class="back-content-inner">
               <img src="assets/images/sections/icon-card-back.png" class="back-icon-small"/>
@@ -80,8 +80,16 @@
 </section>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+
   html {
   scroll-behavior: smooth;
+}
+
+.benefit-card.back {
+  cursor: pointer;
 }
 
   /* --- BASE & ESTRUCTURA --- */
@@ -102,9 +110,9 @@
   }
   
   /* --- HEADER --- */
-  .benefits-pretitle { color: #00b4c8; font-weight: 600; margin-bottom: 10px; font-size: 18px; }
-  .benefits-title { color: #0a4d5c; font-size: 40px; font-weight: 700; margin: 0; }
-  .benefits-description { color: #666; font-size: 18px; max-width: 850px; margin: 20px auto 40px; line-height: 1.4; }
+  .benefits-pretitle { color: #00B0C8; font-weight: 600; margin-bottom: 10px; font-size: 20px; font-family: 'Quicksand', sans-serif;}
+  .benefits-title { color: #005871; font-size: 40px; font-weight: 700; margin: 0; font-family: 'Quicksand', sans-serif; }
+  .benefits-description { color: #4A4A4A; font-size: 18px; max-width: 850px; margin: 20px auto 40px; line-height: 1.4;font-family: 'Montserrat', sans-serif; }
   
   /* --- GRID --- */
   .benefits-cards-row {
@@ -116,85 +124,100 @@
   }
   
   /* --- CARDS --- */
+
   .benefit-card-wrapper {
-    perspective: 1200px;
-    width: 290px; /* Un poco más ancha para el texto grande */
-    height: 400px;
-    flex-shrink: 0;
-  }
-  
-  .benefit-card-inner {
-    position: relative;
-    width: 100%; height: 100%;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-  }
-  
-  .benefit-card-wrapper.flipped .benefit-card-inner { transform: rotateY(-180deg); }
-  
-  .benefit-card {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  }
-  
-  .benefit-card.front {
-    background-color: #0e5f6e;
-    color: white;
-    padding: 40px 25px 25px;
-    justify-content: space-between;
-  }
-  
+  perspective: 1200px;
+  width: 290px;
+  height: 400px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.benefit-card-inner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.benefit-card-wrapper.flipped .benefit-card-inner {
+  transform: rotateY(-180deg);
+}
+
+.benefit-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+ 
+}
+
+.benefit-card.front {
+  background-color: #005871;
+  color: white;
+  padding: 40px 25px 25px;
+  justify-content: space-between;
+  transform: rotateY(0deg);
+}
+
+.benefit-card.back {
+  background-image: url('assets/images/sections/fondo-card-back.png');
+  background-size: cover;
+  background-position: center;
+  padding: 40px 25px 25px;
+  justify-content: center;
+  transform: rotateY(180deg);
+}
   /* TITULOS FRONT - Más grandes y Negrita */
   .card-title { 
-    font-size: 26px; /* Aumentado */
-    font-weight: 800; /* Extra negrita */
+    font-size: 24px; /* Aumentado */
+    font-weight: 700; /* Extra negrita */
+    font-family: 'Quicksand', sans-serif;
     color: #ffffff; 
     margin: 10px 0; 
-    line-height: 1.1; 
+    line-height: 28px;
   }
 
-  .card-text { font-size: 17px; line-height: 1.4; margin-bottom: 20px; }
+  .card-text { font-size: 17px; font-family: 'Montserrat', sans-serif; font-weight: 500;   line-height: 26px;  margin-bottom: 20px; }
 
   /* BOTÓN CARD */
   .card-btn-flip {
-    background: #00b4c8;
-    color: white;
-    border: none;
-    padding: 14px 10px;
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
-    width: 100%;
-    font-size: 15px;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+  background: #00B0C8;
+  color: white;
+  border: none;
+  padding: 14px 10px;
+  border-radius: 8px;
+  font-weight: 600;       /* SemiBold */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;        /* ya correcto */
+  cursor: pointer;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
   
   /* BACK CARD */
-  .benefit-card.back {
-    transform: rotateY(180deg);
-    background-image: url('assets/images/sections/fondo-card-back.png');
-    background-size: cover;
-    background-position: center;
-    padding: 0;
-    overflow: hidden;
-  }
-  
-  .back-content-inner {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start; /* Alineado arriba para mover icono */
-    padding: 60px 25px 30px; /* Más padding arriba */
-    box-sizing: border-box;
-    color: white;
-  }
+.back-content-inner {
+  width: 100%; 
+  height: 100%;
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; /* Centrado total para igualar visualmente al front */
+  padding: 0; 
+  box-sizing: border-box;
+  color: white;
+  text-align: center;
+  gap: 16px;
+}
   
   .back-arrow-icon {
     position: absolute;
@@ -208,20 +231,23 @@
   .back-icon-small { 
     width: 75px; 
     height: 75px; 
-    margin-bottom: 25px; /* Más espacio abajo del icono */
+    margin-bottom: 10px; /* Más espacio abajo del icono */
   }
 
   .back-title { 
-    font-size: 22px; 
-    font-weight: 800; /* Negrita */
+    font-size: 24px; 
+    font-weight: 700; /* Negrita */
+    font-family: 'Quicksand', sans-serif;
     margin-bottom: 12px; 
-    line-height: 1.2;
+    line-height: 28px;
   }
 
   .back-text { 
-    font-size: 16px; 
-    line-height: 1.5; 
-  }
+  font-size: 16px;        /* era: 16px — ya ok */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 26px; 
+}
   
   /* --- BOTONES ACCIONES --- */
   .benefits-actions {
@@ -232,21 +258,22 @@
   }
   
   .btn-otto-dark, .btn-otto-cyan {
-    padding: 16px 30px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    border: none;
-    color: white;
-    white-space: nowrap;
-  }
+  padding: 16px 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  color: white;
+  white-space: nowrap;
+}
   
-  .btn-otto-dark { background: #0a4d5c; }
-  .btn-otto-cyan { background: #00b4c8; }
+.btn-otto-dark { background: #005871; }   /* era: #0a4d5c */
+.btn-otto-cyan { background: #00B0C8; }   /* era: #00b4c8 — ya casi igual */
   
   .btn-otto-dark::after, .btn-otto-cyan::after {
     content: '➔';
@@ -257,6 +284,12 @@
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
+
+  .benefit-card-inner {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d; /* 🔥 importante */
+}
+
   
   /* --- MEDIA QUERIES --- */
   
@@ -265,16 +298,21 @@
     .benefits-section {
       background-image: url('assets/images/hero/FondoPorqueSection-Tablet.png') !important;
     }
-    .benefits-cards-row { gap: 15px; }
-    .benefit-card-wrapper { width: 250px; height: 380px; }
+    .benefits-cards-row { gap: 12px; padding: 0 120px; flex-wrap: wrap;}
+    .benefit-card-wrapper {  width: calc(40% - 8px); min-width: 240px; height: 380px; }
     
-    .card-title { font-size: 22px; }
+    .card-title { font-size: 24px !important; } 
     .card-btn-flip { font-size: 13px; }
     .btn-otto-dark, .btn-otto-cyan { font-size: 14px; padding: 14px 20px; }
   }
   
   /* MOBILE */
   @media (max-width: 480px) {
+    /* En el bloque mobile ya existente, agregar/corregir: */
+  .benefits-pretitle { font-size: 14px !important; }
+  .benefits-title { font-size: 32px !important; }
+  .benefits-description { font-size: 16px !important; }
+
     .benefits-section { 
       background-image: url('assets/images/hero/FondoPorqueSection-Mobile.png') !important;
       padding: 50px 0;
@@ -291,6 +329,9 @@
     .btn-otto-dark, .btn-otto-cyan { 
       width: 90%; 
       justify-content: center; 
+      white-space: normal;    /* ← permite que el texto haga wrap */
+    text-align: center;     /* ← centra el texto al wrappear */
+    font-size: 14px;        /* ← un poco más pequeño para móvil */
     }
   }
 </style>

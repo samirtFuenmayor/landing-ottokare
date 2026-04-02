@@ -53,13 +53,13 @@
      <!-- STEP 2 -->
   <div *ngIf="step === 2">
 
-    
-
     <div class="progress">
       <div class="progress-bar" [style.width.%]="(step-1)/4 * 100"></div>
     </div>
-    <div class="back-btn" (click)="prev()">←</div>
-    <div class="step-label">Paso 1/4</div>
+    <div class="step-header">
+      <img class="arrow-back" src="assets/images/hero/arrow-back.svg" (click)="prev()" alt="Volver">
+      <span class="step-label">Paso 1/4</span>
+    </div>
 
     <h3 class="form-title">
       Dinos un poco más de tu {{selectedPet}}
@@ -67,10 +67,11 @@
 
     <label>¿Cómo se llama?</label>
 
-    <input class="input"
-          placeholder="Escribe el nombre de tu mascota"
-          [(ngModel)]="petName">
+    <input class="input" [class.input-error]="submitted && !petName.trim()"
+    placeholder="Escribe el nombre de tu mascota" [(ngModel)]="petName">
+    <span class="error-msg" *ngIf="submitted && !petName.trim()">El nombre es requerido</span>
 
+    <span class="error-msg" *ngIf="submitted && !gender">Selecciona macho o hembra</span>
     <label>¿Es macho o hembra?</label>
 
     <div class="gender-options">
@@ -78,14 +79,14 @@
         type="button"
         [class.active]="gender==='macho'" 
         (click)="gender='macho'">
-        <span class="gender-icon">♂</span> Macho
+        <img src="assets/images/hero/icon-male.svg">Macho
       </button>
     
       <button 
         type="button"
         [class.active]="gender==='hembra'" 
         (click)="gender='hembra'">
-        <span class="gender-icon">♀</span> Hembra
+        <img src="assets/images/hero/icon-female.svg"> Hembra
       </button>
     </div>
 
@@ -97,102 +98,109 @@
 
 
   <!-- STEP 3 -->
-  <div *ngIf="step === 3" class="fade-in">
-
-    <div class="back-btn" (click)="prev()">←</div>
-  
+  <div *ngIf="step === 3 && !ageOutOfRange" class="fade-in">
     <div class="progress">
       <div class="progress-bar" [style.width.%]="(step-1)/4 * 100"></div>
     </div>
+    <div class="step-header">
+      <img class="arrow-back" src="assets/images/hero/arrow-back.svg" (click)="prev()" alt="Volver">
+      <span class="step-label">Paso 2/4</span>
+    </div>
   
-    <div class="step-label">Paso 2/4</div>
+    <div *ngIf="!ageOutOfRange">
+      <h3 class="form-title">
+        ¡Nos alegra conocer a {{petName}}!
+      </h3>
+      <p class="form-sub-detail">Cuéntanos un poco más de {{ gender === 'macho' ? 'él' : 'ella' }}</p>
   
-    <h3 class="form-title">
-      ¡Nos alegra conocer a {{petName}}!
-    </h3>
-    <p class="form-sub-detail">Cuéntanos un poco más de ella</p>
+      <label class="label-main">¿Cuándo nació?</label>
   
-    <label class="label-main">¿Cuándo nació?</label>
-  
-    <div class="date-selection-container">
-      
-      <div *ngIf="knowExactDate" class="date-row-container">
-        <p class="label-instruction">Escribe la fecha que aparece en su carnet de vacunación.</p>
-        <div class="date-row">
-          <div class="select-group">
-            <span>Día</span>
-            <select class="input-select" [(ngModel)]="day">
-              <option value="" disabled selected>DD</option>
-              <option *ngFor="let d of daysList" [value]="d">{{d}}</option>
-            </select>
-          </div>
-  
-          <div class="select-group">
-            <span>Mes</span>
-            <select class="input-select" [(ngModel)]="month">
-              <option value="" disabled selected>MM</option>
-              <option *ngFor="let m of monthsList; let i = index" [value]="i+1">{{m}}</option>
-            </select>
-          </div>
-  
-          <div class="select-group">
-            <span>Año</span>
-            <select class="input-select" [(ngModel)]="year">
-              <option value="" disabled selected>AAAA</option>
-              <option *ngFor="let y of yearsList" [value]="y">{{y}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
-  
-      <div *ngIf="!knowExactDate" class="date-row-container approx-fade">
-        <p class="label-instruction-blue">¡No hay problema, nos sirve una fecha aproximada!</p>
-        
-        <div class="date-row">
-          <div class="select-group">
-            <span>Mes</span>
-            <div class="select-wrapper">
-              <select class="input-select" [(ngModel)]="approxMonth">
+      <div class="date-selection-container">
+        <div *ngIf="knowExactDate" class="date-row-container">
+          <p class="label-instruction">Escribe la fecha que aparece en su carnet de vacunación.</p>
+          <div class="date-row">
+            <div class="select-group">
+              <span>Día</span>
+                  <select class="input-select" [class.input-error]="submitted && !day" [(ngModel)]="day">
+                  <option value="" disabled selected>DD</option>
+                <option *ngFor="let d of daysList" [value]="d">{{d}}</option>
+              </select>
+            </div>
+            <div class="select-group">
+              <span>Mes</span>
+              <select class="input-select" [class.input-error]="submitted && !month" [(ngModel)]="month">
                 <option value="" disabled selected>MM</option>
                 <option *ngFor="let m of monthsList; let i = index" [value]="i+1">{{m}}</option>
               </select>
             </div>
-          </div>
-  
-          <div class="select-group">
-            <span>Año</span>
-            <div class="select-wrapper">
-              <select class="input-select" [(ngModel)]="approxYear">
+            <span class="error-msg" *ngIf="submitted && (!day || !month || !year)">Completa la fecha</span>
+            <div class="select-group">
+              <span>Año</span>
+              <select class="input-select" [class.input-error]="submitted && !year" [(ngModel)]="year">
                 <option value="" disabled selected>AAAA</option>
                 <option *ngFor="let y of yearsList" [value]="y">{{y}}</option>
               </select>
             </div>
           </div>
         </div>
+  
+        <div *ngIf="!knowExactDate" class="date-row-container approx-fade">
+          <p class="label-instruction-blue">¡No hay problema, nos sirve una fecha aproximada!</p>
+          <div class="date-row">
+            <div class="select-group">
+              <span>Mes</span>
+              <div class="select-wrapper">
+                <select class="input-select" [class.input-error]="submitted && !approxMonth" [(ngModel)]="approxMonth">
+                  <option value="" disabled selected>MM</option>
+                  <option *ngFor="let m of monthsList; let i = index" [value]="i+1">{{m}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="select-group">
+              <span>Año</span>
+              <div class="select-wrapper">
+                <select class="input-select" [class.input-error]="submitted && !approxYear" [(ngModel)]="approxYear">
+                  <option value="" disabled selected>AAAA</option>
+                  <option *ngFor="let y of yearsList" [value]="y">{{y}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="error-msg" *ngIf="submitted && (!approxMonth || !approxYear)">Completa la fecha aproximada</span>
       </div>
   
+      <button class="btn-toggle-date" (click)="knowExactDate=!knowExactDate">
+        {{knowExactDate ? 'No se la fecha exacta' : 'Tengo la fecha exacta'}}
+      </button>
+  
+      <div class="btn-row">
+        <button class="btn-primary-next" (click)="next()">Siguiente</button>
+      </div>
     </div>
-  
-    <button class="btn-toggle-date" (click)="knowExactDate=!knowExactDate">
-      {{knowExactDate ? 'No se la fecha exacta' : 'Tengo la fecha exacta'}}
-    </button>
-  
-    <div class="btn-row">
-      <button class="btn-primary-next" (click)="next()">Siguiente</button>
-    </div>
-  
+  </div>
+
+   <!-- PANTALLA DE ERROR DE EDAD -->
+   <div *ngIf="ageOutOfRange" class="age-error fade-in">
+    <img src="assets/images/hero/icon-heart-broken.svg" class="broken-heart-icon" alt="">
+    <h3 class="age-error-title">
+      Gracias por querer cuidarlo con nosotros, pero no podemos asegurarlo
+    </h3>
+    <p class="age-error-text">
+      Tu mascota se encuentra fuera de los rangos de edad que por el momento cubrimos.
+    </p>
+    <button class="btn-back-home" (click)="reset()">Volver al inicio</button>
   </div>
 
   <!-- STEP 4 -->
   <div *ngIf="step === 4">
-
-    <div class="back-btn" (click)="prev()">←</div>
-  
     <div class="progress">
       <div class="progress-bar" [style.width.%]="(step-1)/4 * 100"></div>
     </div>
-  
-    <div class="step-label">Paso 3/4</div>
+    <div class="step-header">
+      <img class="arrow-back" src="assets/images/hero/arrow-back.svg" (click)="prev()" alt="Volver">
+      <span class="step-label">Paso 3/4</span>
+    </div>
   
     <h3 class="form-title">
       Ya casi, ¿Qué plan te gustaría?
@@ -213,6 +221,7 @@
       </div>
   
     </div>
+    <span class="error-msg" *ngIf="submitted && !plan">Selecciona un plan</span>
   
     <div class="btn-row">
       <button class="btn-primary" (click)="next()">Siguiente</button>
@@ -220,62 +229,54 @@
   
   </div>
 
-  <!-- STEP 5 -->
-  <div *ngIf="step === 5">
 
-    <div class="back-btn" (click)="prev()">←</div>
-
-    <div class="progress">
-      <div class="progress-bar" [style.width.%]="(step-1)/4 * 100"></div>
-    </div>
-
-    <div class="step-label">Paso 4/4</div>
-
-    <h3 class="form-title">
-      Finalmente, cuéntanos sobre ti
-    </h3>
-
-    <div class="grid">
-
-      <input class="input" placeholder="Nombres" [(ngModel)]="user.nombres">
-      <input class="input" placeholder="Apellidos" [(ngModel)]="user.apellidos">
-
-    </div>
-
-    <input class="input" placeholder="Correo electrónico" [(ngModel)]="user.email">
-    <input class="input" placeholder="Celular" [(ngModel)]="user.celular">
-
-    <div class="btn-row">
-      <button class="btn-primary" (click)="next()">Finalizar</button>
-    </div>
-
+<!-- STEP 5 -->
+<div *ngIf="step === 5">
+  <div class="progress">
+    <div class="progress-bar" [style.width.%]="(step-1)/4 * 100"></div>
+  </div>
+  <div class="step-header">
+    <img class="arrow-back" src="assets/images/hero/arrow-back.svg" (click)="prev()" alt="Volver">
+    <span class="step-label">Paso 4/4</span>
   </div>
 
+  <h3 class="form-title">Finalmente, cuéntanos sobre ti</h3>
 
-  <!-- STEP FINAL -->
-  <div *ngIf="step === 6">
-
-    <h3 class="form-title">
-      ¡Gracias por confiar en OttoKare!
-    </h3>
-
-    <p class="form-sub">
-      Hemos recibido tus respuestas. Nos comunicaremos contigo
-      muy pronto para brindarte más información.
-    </p>
-
-    <img 
-    src="assets/images/sections/Btn-volver-inicio.png"
-    width="200"
-    class="btn-image"
-    (click)="reset()">
-
-
+  <div class="grid">
+    <input class="input" [class.input-error]="submitted && !user.nombres.trim()"
+      placeholder="Nombres" [(ngModel)]="user.nombres">
+    <input class="input" [class.input-error]="submitted && !user.apellidos.trim()"
+      placeholder="Apellidos" [(ngModel)]="user.apellidos">
   </div>
+  <span class="error-msg" *ngIf="submitted && !user.nombres.trim()">El nombre es requerido</span>
+  <span class="error-msg" *ngIf="submitted && !user.apellidos.trim()">Los apellidos son requeridos</span>
 
-    </div>
+  <input class="input" [class.input-error]="submitted && !emailValido()"
+    placeholder="Correo electrónico" [(ngModel)]="user.email">
+  <span class="error-msg" *ngIf="submitted && !emailValido()">Ingresa un correo válido</span>
 
+  <input class="input" [class.input-error]="submitted && !celularValido()"
+    placeholder="Celular" [(ngModel)]="user.celular" (keypress)="soloNumeros($event)">
+  <span class="error-msg" *ngIf="submitted && !celularValido()">Ingresa un número válido</span>
+
+  <div class="btn-row">
+    <button class="btn-primary" (click)="next()">Finalizar</button>
   </div>
+</div>
+
+<!-- STEP FINAL -->
+<div *ngIf="step === 6">
+  <h3 class="form-title">¡Gracias por confiar en OttoKare!</h3>
+  <p class="form-sub">
+    Hemos recibido tus respuestas. Nos comunicaremos contigo
+    muy pronto para brindarte más información.
+  </p>
+  <img src="assets/images/sections/Btn-volver-inicio.png"
+    width="200" class="btn-image" (click)="reset()">
+</div>
+
+  </div> <!-- cierre form-card -->
+</div>   <!-- cierre join-container -->
 
 </section>
 
